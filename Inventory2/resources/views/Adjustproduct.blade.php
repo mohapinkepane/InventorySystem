@@ -11,7 +11,6 @@
                  <h4 class="my-0 font-weight-normal">{{$product->Name}}</h4>
                    </div>
                  <div class="card-body">
-                  
                        <form method ="POST" action =" ">  
                           
                        {{csrf_field()}}
