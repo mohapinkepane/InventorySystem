@@ -19,7 +19,7 @@
                                document.getElementById('logout-form').submit();">
                       Logout
                   </a>
-
+                   this ie our nav bar
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       {{ csrf_field() }}
                   </form>
