@@ -50,7 +50,7 @@
         return{
            product:{
             name:' ',
-            price:' ',
+            price:0,
             barcode:' ',
             quantity:' '
            }

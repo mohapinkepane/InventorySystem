@@ -15575,7 +15575,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       product: {
         name: ' ',
-        price: ' ',
+        price: 0,
         barcode: ' ',
         quantity: ' '
       }
@@ -16701,6 +16701,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DashBoard__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DashBoard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__DashBoard__);
 //
 //
 //
@@ -16733,9 +16735,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: { dashboard: __WEBPACK_IMPORTED_MODULE_1__DashBoard___default.a },
     data: function data() {
         return {
             products: []
@@ -16772,81 +16779,87 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h1", [_vm._v("Products")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-10" }),
+  return _c(
+    "div",
+    [
+      _c("h1", [_vm._v("Products")]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-2" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { to: { name: "CreateProduct" } }
-            },
-            [_vm._v("Add Product")]
-          )
-        ],
-        1
-      )
-    ]),
-    _c("br"),
-    _vm._v(" "),
-    _c("table", { staticClass: "table table-hover" }, [
-      _vm._m(0),
+      _c("dashboard", { attrs: { products: _vm.products } }),
       _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.products, function(product) {
-          return _c("tr", { key: product.id }, [
-            _c("td", [_vm._v(_vm._s(product.Name))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(product.Price))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(product.Quantity))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(product.Barcode))]),
-            _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-10" }),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-2" },
+          [
             _c(
-              "td",
-              [
+              "router-link",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { to: { name: "CreateProduct" } }
+              },
+              [_vm._v("Add Product")]
+            )
+          ],
+          1
+        )
+      ]),
+      _c("br"),
+      _vm._v(" "),
+      _c("table", { staticClass: "table table-hover" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.products, function(product) {
+            return _c("tr", { key: product.id }, [
+              _c("td", [_vm._v(_vm._s(product.Name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(product.Price))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(product.Quantity))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(product.Barcode))]),
+              _vm._v(" "),
+              _c(
+                "td",
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: {
+                        to: { name: "EditProduct", params: { id: product.id } }
+                      }
+                    },
+                    [_vm._v("Edit")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("td", [
                 _c(
-                  "router-link",
+                  "button",
                   {
-                    staticClass: "btn btn-primary",
-                    attrs: {
-                      to: { name: "EditProduct", params: { id: product.id } }
+                    staticClass: "btn btn-danger",
+                    on: {
+                      click: function($event) {
+                        _vm.deleteProduct(product.id)
+                      }
                     }
                   },
-                  [_vm._v("Edit")]
+                  [_vm._v("Delete")]
                 )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("td", [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-danger",
-                  on: {
-                    click: function($event) {
-                      _vm.deleteProduct(product.id)
-                    }
-                  }
-                },
-                [_vm._v("Delete")]
-              )
+              ])
             ])
-          ])
-        })
-      )
-    ])
-  ])
+          })
+        )
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -17138,6 +17151,161 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(66)
+/* template */
+var __vue_template__ = __webpack_require__(67)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\DashBoard.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1fad49e6", Component.options)
+  } else {
+    hotAPI.reload("data-v-1fad49e6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 66 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['products'],
+
+    data: function data() {
+        return {};
+    },
+
+    computed: {
+
+        productCount: function productCount() {
+            return this.products.length;
+        },
+
+        totalPrice: function totalPrice() {
+            var total = 0;
+            this.products.forEach(function (product) {
+                isNaN(parseInt(product.Price)) ? '' : total += parseInt(product.Price);
+            });
+            return total;
+        }
+
+    }
+
+});
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h3", [_vm._v("DashBoard")]),
+    _vm._v(" "),
+    _c("table", { staticClass: "table table-hover" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("tbody", [
+        _c("tr", [
+          _c("td", [_vm._v(_vm._s(_vm.productCount))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(_vm.totalPrice))])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("td", [_vm._v("Number of products")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Total Price")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1fad49e6", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

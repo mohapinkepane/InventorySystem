@@ -2,6 +2,9 @@
 <template>
     <div>
         <h1>Products</h1>
+        <!-- include dashboard -->
+        <dashboard :products='products'></dashboard>
+         
         <div class="row">
           <div class="col-md-10"></div>
           <div class="col-md-2">
@@ -32,7 +35,9 @@
 </template>
 <script>
     import axios from 'axios';
+    import dashboard from "./DashBoard";
     export default {
+        components:{dashboard},
         data(){
             return{
                 products:[]
