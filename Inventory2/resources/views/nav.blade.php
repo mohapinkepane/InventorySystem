@@ -24,8 +24,7 @@
                   </form>
       
     @endguest
-   
-       
+    
     </nav>
 
 </div>
