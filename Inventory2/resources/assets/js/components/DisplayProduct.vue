@@ -3,7 +3,7 @@
     <div>
         <h1>Products</h1>
         <!-- include dashboard -->
-        <dashboard :products='products'></dashboard>
+        <dashboard ></dashboard>
          
         <div class="row">
           <div class="col-md-10"></div>
@@ -35,12 +35,12 @@
 </template>
 <script>
     import axios from 'axios';
+    import { mapGetters } from "vuex";
     import dashboard from "./DashBoard";
     export default {
         components:{dashboard},
         data(){
             return{
-                products:[]
             }
         },
         mounted()
@@ -50,18 +50,21 @@
         methods: {
             fetchProducts()
             {
-                  axios.get('./products').then(response=>{
-                  this.products= response.data;
+            //       axios.get('./products').then(response=>{
+            //       this.products= response.data;
 
-              });
+            //   });
              },
               deleteProduct(id)
               {  
-                 this.products.splice(id, 1);
-                 axios.get('./products/'+id).then(response=>{
-                 this.products= response.data;
-               });
+            //      this.products.splice(id, 1);
+            //      axios.get('./products/'+id).then(response=>{
+            //      this.products= response.data;
+            //    });
              }
+        },
+        computed:{
+             ...mapGetters(['products']),
         }
     }
 </script>

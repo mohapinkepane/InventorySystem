@@ -19,28 +19,17 @@
 
 <script>
     import axios from 'axios';
+    import { mapGetters } from "vuex";
     export default {
-        props:['products'],
+
 
         data(){
             return{
-
+ 
                   }
         },
         computed:{
-                 
-                 productCount:function(){
-                 return this.products.length;
-
-                              },
-
-                totalPrice:function(){
-                     let total=0;
-                     this.products.forEach(product=>{
-                         isNaN(parseInt(product.Price))?'':total += parseInt(product.Price);
-                     });      
-                     return total;                 
-                    }
+                ...mapGetters(['products','productCount','totalPrice']),
 
               },  
 

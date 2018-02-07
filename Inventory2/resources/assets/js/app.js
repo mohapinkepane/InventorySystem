@@ -22,14 +22,22 @@
 // app.js
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-Vue.use(VueRouter);
+// import Vuex from 'vuex';
 
+
+Vue.use(VueRouter);
 import App from './App.vue';
+
+//importing store
+import { store } from './store';
 
 import ExampleComponent from './components/ExampleComponent.vue';
 import CreateProduct from './components/CreateProduct.vue';
 import DisplayProduct from './components/DisplayProduct.vue';
 import EditProduct from './components/EditProduct.vue';
+
+
+
 
 const routes = [
       {
@@ -53,5 +61,6 @@ const routes = [
    
   ];
 
+//   new Vue(Vue.util.extend({ store }, App)).$mount('#app');
 const router = new VueRouter({ routes: routes});
-new Vue(Vue.util.extend({ router }, App)).$mount('#app');
+new Vue(Vue.util.extend({ router,store }, App)).$mount('#app');
