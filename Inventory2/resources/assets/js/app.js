@@ -61,6 +61,5 @@ const routes = [
    
   ];
 
-//   new Vue(Vue.util.extend({ store }, App)).$mount('#app');
 const router = new VueRouter({ routes: routes});
 new Vue(Vue.util.extend({ router,store }, App)).$mount('#app');

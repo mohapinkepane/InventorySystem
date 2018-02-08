@@ -27,7 +27,7 @@
             return{
  
                   }
-        },
+         },
         computed:{
                 ...mapGetters(['products','productCount','totalPrice']),
 

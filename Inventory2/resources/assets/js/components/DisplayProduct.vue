@@ -26,8 +26,8 @@
                     <td>{{ product.Price }}</td>
                     <td>{{ product.Quantity}}</td>
                     <td>{{ product.Barcode}}</td>
-                    <td><router-link :to="{name:'EditProduct', params:{id: product.id }}" class="btn btn-primary">Edit</router-link></td>
-                    <td><button class="btn btn-danger" @click="deleteProduct(product.id)">Delete</button></td>
+                    <td @click="setSelectedProduct(product)"><router-link :to="{name:'EditProduct', params:{id: product.id }}" class="btn btn-primary">Edit</router-link></td>
+                    <td><button class="btn btn-danger" @click="destroyProduct(product)">Delete</button></td>
                 </tr>
             </tbody>
         </table>
@@ -35,7 +35,8 @@
 </template>
 <script>
     import axios from 'axios';
-    import { mapGetters } from "vuex";
+    import {mapGetters } from "vuex";
+    import {mapActions}  from "vuex";
     import dashboard from "./DashBoard";
     export default {
         components:{dashboard},
@@ -47,23 +48,42 @@
         {
             this.fetchProducts();
         },
-        methods: {
-            fetchProducts()
-            {
-            //       axios.get('./products').then(response=>{
-            //       this.products= response.data;
 
-            //   });
-             },
-              deleteProduct(id)
-              {  
-            //      this.products.splice(id, 1);
-            //      axios.get('./products/'+id).then(response=>{
-            //      this.products= response.data;
-            //    });
-             }
-        },
+         methods: {
+          ...mapActions(['deleteProduct','fetchProductsList','setSelectedProduct']),
+
+              destroyProduct(product){
+              this.deleteProduct(product);
+              },
+              fetchProducts()
+            {
+                this.fetchProductsList();
+            }
+
+         },
+        
+        // methods: {
+             
+
+        //     fetchProducts()
+        //     {
+        //     // axios.get('./products').then(response=>{
+        //     // this.products= response.data;
+
+        //     // //  
+        //     //  });
+
+        //      },
+        //       deleteProduct(id)
+        //       {  
+        //     //      this.products.splice(id, 1);
+        //     //      axios.get('./products/'+id).then(response=>{
+        //     //      this.products= response.data;
+        //     //    });
+        //      }
+        // },
         computed:{
+             
              ...mapGetters(['products']),
         }
     }

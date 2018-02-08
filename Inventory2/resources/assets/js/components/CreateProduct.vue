@@ -63,6 +63,7 @@ import { mapActions } from "vuex";
 
         saveProduct(){
               this.addProduct(this.product);
+              this.$router.push({name:'DisplayProduct'});
       }
   }
 }

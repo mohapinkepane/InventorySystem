@@ -1155,7 +1155,6 @@ var routes = [{
 
 }];
 
-//   new Vue(Vue.util.extend({ store }, App)).$mount('#app');
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({ routes: routes });
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.util.extend({ router: router, store: __WEBPACK_IMPORTED_MODULE_3__store__["a" /* store */] }, __WEBPACK_IMPORTED_MODULE_2__App_vue___default.a)).$mount('#app');
 
@@ -15595,6 +15594,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['addProduct']), {
     saveProduct: function saveProduct() {
       this.addProduct(this.product);
+      this.$router.push({ name: 'DisplayProduct' });
     }
   })
 });
@@ -16749,6 +16749,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: { dashboard: __WEBPACK_IMPORTED_MODULE_2__DashBoard___default.a },
     data: function data() {
@@ -16758,20 +16759,36 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         this.fetchProducts();
     },
 
-    methods: {
-        fetchProducts: function fetchProducts() {
-            //       axios.get('./products').then(response=>{
-            //       this.products= response.data;
 
-            //   });
+    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(['deleteProduct', 'fetchProductsList', 'setSelectedProduct']), {
+        destroyProduct: function destroyProduct(product) {
+            this.deleteProduct(product);
         },
-        deleteProduct: function deleteProduct(id) {
-            //      this.products.splice(id, 1);
-            //      axios.get('./products/'+id).then(response=>{
-            //      this.products= response.data;
-            //    });
+        fetchProducts: function fetchProducts() {
+            this.fetchProductsList();
         }
-    },
+    }),
+
+    // methods: {
+
+
+    //     fetchProducts()
+    //     {
+    //     // axios.get('./products').then(response=>{
+    //     // this.products= response.data;
+
+    //     // //  
+    //     //  });
+
+    //      },
+    //       deleteProduct(id)
+    //       {  
+    //     //      this.products.splice(id, 1);
+    //     //      axios.get('./products/'+id).then(response=>{
+    //     //      this.products= response.data;
+    //     //    });
+    //      }
+    // },
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])(['products']))
 });
 
@@ -16828,6 +16845,13 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "td",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.setSelectedProduct(product)
+                    }
+                  }
+                },
                 [
                   _c(
                     "router-link",
@@ -16850,7 +16874,7 @@ var render = function() {
                     staticClass: "btn btn-danger",
                     on: {
                       click: function($event) {
-                        _vm.deleteProduct(product.id)
+                        _vm.destroyProduct(product)
                       }
                     }
                   },
@@ -16947,6 +16971,9 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(69);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -16974,30 +17001,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
 
         return {
-            product: {
-                Price: ' ',
-                Quantity: ' ',
-                Barcode: ' '
-            }
+            product: {}
         };
+    },
+    mounted: function mounted() {
+        this.product = this.selectedProduct;
     },
 
 
-    methods: {
-        updateProduct: function updateProduct() {
-            var _this = this;
-
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/Adjustproduct/' + this.$route.params.id, this.product).then(function (response) {
-                _this.$router.push({ name: 'DisplayProduct' });
-            });
+    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(['updateProductinDatabase']), {
+        updateProduct: function updateProduct(product) {
+            //axios.post('/Adjustproduct/'+this.$route.params.id,this.product).then((response) =>//
+            var id = this.$route.params.id;
+            this.updateProductinDatabase({ product: product, id: id });
+            this.$router.push({ name: 'DisplayProduct' });
         }
-    }
+    }),
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])(['productCurrent', 'products', 'productCount', 'totalPrice', 'selectedProduct']))
 });
 
 /***/ }),
@@ -17037,7 +17069,7 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            _vm.updateProduct($event)
+            _vm.updateProduct(_vm.product)
           }
         }
       },
@@ -17057,7 +17089,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text" },
+            attrs: { type: "text", required: "" },
             domProps: { value: _vm.product.Price },
             on: {
               input: function($event) {
@@ -17085,7 +17117,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text" },
+            attrs: { type: "text", required: "" },
             domProps: { value: _vm.product.Quantity },
             on: {
               input: function($event) {
@@ -17113,7 +17145,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text" },
+            attrs: { type: "text", required: "" },
             domProps: { value: _vm.product.Barcode },
             on: {
               input: function($event) {
@@ -17318,15 +17350,8 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
 var store = new __WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */].Store({
     state: {
 
-        products: [{ Name: 'Soap', Price: 5, Quantity: 10, Barcode: 123456 }],
-
-        product: {
-            name: ' ',
-            price: '',
-            barcode: ' ',
-            quantity: ' '
-
-        }
+        products: [],
+        selectedProduct: {}
 
     },
     getters: {
@@ -17342,21 +17367,84 @@ var store = new __WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */].Store({
                 isNaN(parseInt(product.Price)) ? '' : total += parseInt(product.Price);
             });
             return total;
+        },
+        productCurrent: function productCurrent(state) {
+            return state.products.product;
+        },
+        selectedProduct: function selectedProduct(state) {
+            return state.selectedProduct;
         }
     },
     mutations: {
+        SET_SELECTED_PRODUCT: function SET_SELECTED_PRODUCT(state, product) {
+            state.selectedProduct = product;
+        },
+        CLEAR_SELECTED_PRODUCT: function CLEAR_SELECTED_PRODUCT(state, product) {
+            state.selectedProduct = {};
+        },
+        PULL_PRODUCT_LIST: function PULL_PRODUCT_LIST(state, products) {
+            state.products = products;
+        },
         ADD_PRODUCT_TO_LIST: function ADD_PRODUCT_TO_LIST(state, product) {
             state.products.push(product);
+        },
+        DELETE_PRODUCT: function DELETE_PRODUCT(state, product) {
+            var index = state.products.indexOf(product);
+            if (index > -1) {
+                state.products.splice(index, 1);
+            }
+        },
+        UPDATE_PRODUCT: function UPDATE_PRODUCT(state, product) {
+
+            var refreshProduct = state.products.find(function (item) {
+                return item.id == product.id;
+            });
+
+            var productIndex = state.products.indexOf(refreshProduct);
+            state.products[productIndex] = product;
         }
     },
     actions: {
-        addProduct: function addProduct(_ref, product) {
+        setSelectedProduct: function setSelectedProduct(_ref, product) {
             var commit = _ref.commit;
+
+            commit('SET_SELECTED_PRODUCT', product);
+        },
+        addProduct: function addProduct(_ref2, product) {
+            var commit = _ref2.commit;
 
             __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/Addnew', product).then(function (response) {
                 commit('ADD_PRODUCT_TO_LIST', product);
-                // this.$router.push({name:'DisplayProduct'})
             }).catch(function (error) {});
+        },
+        fetchProductsList: function fetchProductsList(_ref3) {
+            var commit = _ref3.commit;
+
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('./products').then(function (response) {
+
+                commit('PULL_PRODUCT_LIST', response.data);
+            }).catch(function (error) {
+                console.log('ERROR');
+            });
+        },
+        deleteProduct: function deleteProduct(_ref4, product) {
+            var commit = _ref4.commit;
+
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('./products/' + product.id).then(function (response) {
+                commit('DELETE_PRODUCT', product);
+            }).catch(function (error) {});
+        },
+        updateProductinDatabase: function updateProductinDatabase(_ref5, _ref6) {
+            var commit = _ref5.commit;
+            var product = _ref6.product,
+                id = _ref6.id;
+
+
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/Adjustproduct/' + id, product).then(function (response) {
+                commit('UPDATE_PRODUCT', { product: product });
+            }).catch(function (error) {
+                console.log(error);
+            });
         }
     }
 
