@@ -54,7 +54,8 @@ const routes = [
 
      { 
         name: 'EditProduct',
-        path: '/Adjustproduct/:{id}',
+        //path:'/Adjustproduct/:{id}',
+        path:'/Adjustproduct',
         component: EditProduct
 
      },
