@@ -14,12 +14,7 @@
 
             </div>
             <div class="form-group">
-<<<<<<< HEAD
-                <label>Product Name:</label>
-                <label name="product_price">Product Quantity</label>
-=======
                 <label name="product_quantity">Product Quantity</label>
->>>>>>> 9ee4a5ba524290c5ef1a0fbc2c0ab531056facbd
                 <input type="text" class="form-control" v-model="product.Quantity"  required>
             </div>
             <div class="form-group">
