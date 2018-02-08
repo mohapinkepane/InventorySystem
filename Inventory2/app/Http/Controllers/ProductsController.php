@@ -46,7 +46,7 @@ class ProductsController extends Controller
             'Name'=>request("Name"),
             'Price'=>request("Price"),
             'Quantity'=>request("Quantity"),
-            'Barcode'=>request("Barcode"),  
+            'Barcode'=>request("Barcode") 
          ] );
        
         // return redirect('/products');
