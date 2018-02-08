@@ -1150,7 +1150,7 @@ var routes = [{
 
 }, {
   name: 'EditProduct',
-  //path: '/Adjustproduct/:{id}',
+  //path:'/Adjustproduct/:{id}',
   path: '/Adjustproduct',
   component: __WEBPACK_IMPORTED_MODULE_7__components_EditProduct_vue___default.a
 
