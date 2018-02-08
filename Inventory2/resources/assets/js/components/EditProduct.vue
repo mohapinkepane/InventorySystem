@@ -15,6 +15,7 @@
                 <!-- v-model="product.Price"  -->
             </div>
             <div class="form-group">
+                <label>Product Name:</label>
                 <label name="product_price">Product Quantity</label>
                 <input type="text" class="form-control" v-model="product.Quantity"  required>
             </div>
