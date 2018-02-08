@@ -2,6 +2,10 @@
 <template>
   <div>
     <h1>Add product</h1>
+    <div class="row">
+          <div class="col-md-10"></div>
+          <div class="col-md-2"><router-link :to="{ name:'DisplayProduct' }" class="btn btn-success">Return to Products</router-link></div>
+         </div>
     <form v-on:submit.prevent="saveProduct">
       <div class="row">
         <div class="col-md-6">

@@ -1150,7 +1150,8 @@ var routes = [{
 
 }, {
   name: 'EditProduct',
-  path: '/Adjustproduct/:{id}',
+  //path: '/Adjustproduct/:{id}',
+  path: '/Adjustproduct',
   component: __WEBPACK_IMPORTED_MODULE_7__components_EditProduct_vue___default.a
 
 }];
@@ -15574,6 +15575,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -16494,6 +16499,26 @@ var render = function() {
   return _c("div", [
     _c("h1", [_vm._v("Add product")]),
     _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-10" }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-md-2" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-success",
+              attrs: { to: { name: "DisplayProduct" } }
+            },
+            [_vm._v("Return to Products")]
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
     _c(
       "form",
       {
@@ -17004,7 +17029,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 
@@ -17063,6 +17087,8 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
+    _c("h2", [_vm._v(_vm._s(_vm.product.Name))]),
+    _vm._v(" "),
     _c(
       "form",
       {
@@ -17103,7 +17129,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { name: "product_price" } }, [
+          _c("label", { attrs: { name: "product_quantity" } }, [
             _vm._v("Product Quantity")
           ]),
           _vm._v(" "),
@@ -17131,7 +17157,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { name: "product_price" } }, [
+          _c("label", { attrs: { name: "product_barcode" } }, [
             _vm._v("Product Barcode")
           ]),
           _vm._v(" "),
